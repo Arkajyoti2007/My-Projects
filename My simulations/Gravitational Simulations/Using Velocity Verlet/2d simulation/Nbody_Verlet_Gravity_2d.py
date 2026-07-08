@@ -4,7 +4,7 @@ import Verlet_Gravity as V
 from matplotlib.animation import FuncAnimation
 
 
-def animate(r,v,m,e,N,G,xlim,ylim,title,xlabel,ylabel,grid,blit,colors , frames , dt,interval ):
+def animate(r,v,m,e,N,G,xlim,ylim,title,xlabel,ylabel,grid,blit,colors,ms , frames , dt,interval ):
     fig,ax=plt.subplots(figsize=(7, 7))
     ax.set_xlim(xlim[0],xlim[1])
     ax.set_ylim(ylim[0],ylim[1])
@@ -14,8 +14,8 @@ def animate(r,v,m,e,N,G,xlim,ylim,title,xlabel,ylabel,grid,blit,colors , frames 
     ax.set_title(title)
     ax.set_aspect('equal')
 
-    body=[ax.plot([],[],'o',color=colors[i],ms=5,zorder=3)[0] for i in range(N)]
-    trails=[ax.plot([],[],'-',color=colors[i],alpha=0.5,zorder=2)[0] for i in range(N)]
+    body=[ax.plot([],[],marker='o',color=colors[i],markersize=ms[i],zorder=3)[0] for i in range(N)]
+    trails=[ax.plot([],[],color=colors[i],alpha=0.5,zorder=2)[0] for i in range(N)]
 
 
 

@@ -21,7 +21,10 @@ r_max=10*np.sqrt(2)
 v_min=2
 v_max=4
 
+#Setting marker size and color for each body
 c = np.random.rand(N, 3)
+ms=np.zeros(N)
+ms[:]=5
 
 for k in range(N):
     mbody=np.random.uniform(m_min,m_max)
@@ -35,4 +38,4 @@ for k in range(N):
 
 
 
-animate(r,v,m,e,N,G,xlim=[-11,11],ylim=[-11,11],title='Nbody random simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=True,colors=c,frames=10000,dt=0.1,interval=10)
+animate(r,v,m,e,N,G,xlim=[-11,11],ylim=[-11,11],title='Nbody random simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=True,colors=c,ms=ms,frames=10000,dt=0.1,interval=10)

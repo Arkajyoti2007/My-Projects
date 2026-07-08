@@ -11,4 +11,8 @@ N=2
 G=1
 e=0.1
 
-animate(r,v,m,e,N,G,xlim=[-11,11],ylim=[-11,11],title='Nbody simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=True,colors=['Red','Green'],frames=100,dt=0.1,interval=1)
+## Setting marker size and color for each body
+c = ['Red','Green']
+ms=np.array([5,5],float)
+
+animate(r,v,m,e,N,G,xlim=[-11,11],ylim=[-11,11],title='Nbody simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=True,colors=c,ms=ms,frames=100,dt=0.1,interval=1)

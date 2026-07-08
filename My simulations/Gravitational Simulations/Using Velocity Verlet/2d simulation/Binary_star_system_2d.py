@@ -10,4 +10,5 @@ v=np.array([[-1.054,-0.556],[1.054,-0.556]],float)
 N=2
 G=1
 e=0.1
-animate(r,v,m,e,N,G,xlim=[-100,100],ylim=[-100,100],title='Binart star 2d simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=False,colors=['Red','Green'],frames=10000,dt=0.1,interval=1)
+
+animate(r,v,m,e,N,G,xlim=[-100,100],ylim=[-100,100],title='Binary star 2d simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=False,colors=['Red','Green'],ms=[5,5],frames=10000,dt=0.1,interval=1)

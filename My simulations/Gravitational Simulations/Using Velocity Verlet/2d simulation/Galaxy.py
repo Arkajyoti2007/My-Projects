@@ -45,14 +45,16 @@ for k in range(1,N):
     
     #Velocities
     v_o=np.sqrt(G*m_centre/dist)
-    v_body=np.random.uniform(v_o - 0.45*v_o , v_o)
+    v_body=v_o*np.random.uniform(0.5,1)
     v[k,0] , v[k,1] = v_body*np.cos(theta+np.pi/2) , v_body*np.sin(theta+np.pi/2)
     
 ## Defining the colour variable
 c = np.random.rand(N, 3)
+ms=np.zeros(N)
+ms[:]=5
 
 ## Setting x and y limits for the simulation
 xlim=[-(r_max + 4), (r_max + 4)]
 ylim=[-(r_max + 4), (r_max + 4)]
 
-animate(r,v,m,e,N,G,xlim=xlim,ylim=ylim,title='Galaxy Simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=True,colors=c,frames=10000,dt=0.01,interval=10)
+animate(r,v,m,e,N,G,xlim=xlim,ylim=ylim,title='Galaxy Simulation',xlabel='X axis',ylabel='Y axis',grid=True,blit=True,colors=c,ms=ms,frames=10000,dt=0.01,interval=10)

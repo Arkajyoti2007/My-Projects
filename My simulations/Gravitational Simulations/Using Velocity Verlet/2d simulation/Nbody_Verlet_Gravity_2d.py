@@ -29,7 +29,9 @@ def animate(r,v,m,e,N,G,xlim,ylim,title,xlabel,ylabel,grid,blit,colors , frames 
 
     x_history=np.zeros((N,frames))
     y_history=np.zeros((N,frames))
-    
+    KE=np.zeros(frames)
+    PE=np.zeros(frames)
+    TE=np.zeros(frames)
 
     def update_frame(frame):
         nonlocal r,v,a
@@ -39,9 +41,20 @@ def animate(r,v,m,e,N,G,xlim,ylim,title,xlabel,ylabel,grid,blit,colors , frames 
             y_history[i,frame]=r[i,1]
             body[i].set_data([x_history[i,frame]],[y_history[i,frame]])
             trails[i].set_data(x_history[i,:frame],y_history[i,:frame])
+        KE[frame],PE[frame],TE[frame]=V.energy(m,r,v,e,N,G)
+        
         return body+trails
 
     ani=FuncAnimation(fig,update_frame,frames=frames,interval=interval,init_func=init,blit=blit)
+    frame_array=np.arange(frames)
+    plt.show()
+    plt.plot(frame_array,KE,label='Kinetic Energy')
+    plt.plot(frame_array,PE,label='Potential Energy')
+    plt.plot(frame_array,TE,label='Total Energy')
+    plt.legend()
+    plt.xlabel('Frame')
+    plt.ylabel('Energy')
+    plt.title('Energy vs Frame')
     plt.show()
 
 

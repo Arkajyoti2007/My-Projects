@@ -13,6 +13,17 @@ def acceleration(m,r,e,N,G):
     return np.column_stack((a_x, a_y))
 
 
+def energy(m,r,v,e,N,G):
+    ke,pe,te=0,0,0
+    for i in range(N):
+        for j in range(i+1,N):
+            pe+=G*m[i]*m[j]/np.sqrt((r[i,0]-r[j,0])**2 + (r[i,1]-r[j,1])**2 + e**2)
+        ke+=0.5*m[i]*(v[i,0]**2 + v[i,1]**2)
+    te=ke-pe     
+    return ke,pe,te
+
+
+
 def verlet(r,v,dt,m,a,e,N,G):
     r_new=r.copy()
     r_new=r + v*dt + 0.5*a*dt**2

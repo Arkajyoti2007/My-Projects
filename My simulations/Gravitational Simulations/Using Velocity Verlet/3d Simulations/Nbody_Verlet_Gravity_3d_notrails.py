@@ -16,42 +16,31 @@ def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colo
     ax.set_zlabel(zlabel)
     ax.set_title(title)
     ax.set_aspect('equal')
+    ax.set_axis_off()
 
     body=[ax.plot3D([],[],[],marker='o',color=colors[i],markersize=ms[i],zorder=3)[0] for i in range(N)]
-    trails=[ax.plot3D([],[],[],'k-',alpha=0.5,zorder=2)[0] for i in range(N)]
-
-
-
     a=V.acceleration(m,r,e,N,G)
 
     def init():
         for i in range(N):
             body[i].set_data([r[i, 0]], [r[i, 1]])
             body[i].set_3d_properties([r[i, 2]])
-            trails[i].set_data([], [])
-            trails[i].set_3d_properties([])
-        return body + trails
+        return body
 
-    x_history=np.zeros((N,frames))
-    y_history=np.zeros((N,frames))
-    z_history=np.zeros((N,frames))
 
     def update_frame(frame):
         nonlocal r,v,a
         r,v,a=V.verlet(r,v,dt,m,a,e,N,G)
         for i in range(N):
-            x_history[i,frame]=r[i,0]
-            y_history[i,frame]=r[i,1]
-            z_history[i,frame]=r[i,2]
-            body[i].set_data([x_history[i,frame]],[y_history[i,frame]])
-            body[i].set_3d_properties([z_history[i,frame]])
-            trails[i].set_data(x_history[i,:frame],y_history[i,:frame])
-            trails[i].set_3d_properties(z_history[i,:frame])
-        return body+trails
+
+            body[i].set_data([r[i, 0]],[r[i, 1]])
+            body[i].set_3d_properties([r[i, 2]])
+        return body
 
     ani=FuncAnimation(fig,update_frame,frames=frames,interval=interval,init_func=init,blit=blit)
     plt.show()
-    ani.save('Nbody_simulation.mp4', writer='ffmpeg', fps=30, dpi=300)
+  
+ 
 
 
 

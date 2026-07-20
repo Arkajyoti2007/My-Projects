@@ -4,6 +4,7 @@ def acceleration(m,r,e,N,G):
     i,j = np.triu_indices(N,k=1)
     a_x = np.zeros(N)
     a_y = np.zeros(N)
+    a_z=  np.zeros(N)
     dx = r[j,0] - r[i,0]
     dy = r[j,1] - r[i,1]
     dz = r[j,2] - r[i,2]

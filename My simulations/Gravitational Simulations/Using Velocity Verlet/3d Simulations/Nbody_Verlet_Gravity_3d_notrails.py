@@ -5,7 +5,7 @@ from matplotlib.animation import FuncAnimation
 
 
 def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colors ,ms, frames , dt,interval ):
-    fig=plt.figure(figsize=(7, 7))
+    fig=plt.figure(figsize=(15, 15))
     ax=fig.add_subplot(111,projection='3d')
     ax.set_xlim(xlim[0],xlim[1])
     ax.set_ylim(ylim[0],ylim[1])

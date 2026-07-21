@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import Verlet_Gravity as V
+import Verlet_Gravity_numba as V
 from matplotlib.animation import FuncAnimation
 from Nbody_Verlet_Gravity_3d import animate
 

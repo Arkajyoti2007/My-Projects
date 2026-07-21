@@ -17,6 +17,7 @@ def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colo
     ax.set_title(title)
     ax.set_aspect('equal')
 
+
     body=[ax.plot3D([],[],[],marker='o',color=colors[i],markersize=ms[i],zorder=3)[0] for i in range(N)]
     trails=[ax.plot3D([],[],[],'k-',alpha=0.5,zorder=2)[0] for i in range(N)]
 
@@ -51,7 +52,6 @@ def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colo
 
     ani=FuncAnimation(fig,update_frame,frames=frames,interval=interval,init_func=init,blit=blit)
     plt.show()
-    ani.save('Nbody_simulation.mp4', writer='ffmpeg', fps=30, dpi=300)
 
 
 

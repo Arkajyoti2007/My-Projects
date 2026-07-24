@@ -2,7 +2,7 @@ import numpy as np
 from numba import njit, prange
 
 @njit(parallel=True, fastmath=True, cache=True)
-def acceleration(m, r, e, N, G):
+def acceleration(m,t,r,v,e, N, G):
     a = np.zeros((N, 3))
     e2 = e * e
     for i in prange(N):
@@ -38,8 +38,23 @@ def energy(m,r,v,e,N,G):
     te=ke-pe     
     return ke,pe,te
 
-def verlet(r, v, dt, m, a, e, N, G):
-    r_new = r + v * dt + 0.5 * a * dt ** 2
-    a_new = acceleration(m, r_new, e, N, G)
-    v_new = v + 0.5 * (a + a_new) * dt
+
+def rk(r, v, dt, m, a, e, N, G):
+
+    kx1 = v
+    kv1 = a
+
+    kx2 = v + 0.5 * dt * kv1
+    kv2=acceleration(m, 0, r + 0.5 * dt * kx1, v + 0.5 * dt * kv1, e, N, G)
+
+    kx3 = v + 0.5 * dt * kv2
+    kv3=acceleration(m, 0, r + 0.5 * dt * kx2, v + 0.5 * dt * kv2, e, N, G)
+
+    kx4 = v + dt * kv3
+    kv4=acceleration(m, 0, r + dt * kx3, v + dt * kv3, e, N, G)
+
+    r_new = r + (dt / 6.0) * (kx1 + 2 * kx2 + 2 * kx3 + kx4)
+    v_new = v + (dt / 6.0) * (kv1 + 2 * kv2 + 2 * kv3 + kv4)
+    a_new = acceleration(m, 0, r_new, v_new, e, N, G)
+
     return r_new, v_new, a_new

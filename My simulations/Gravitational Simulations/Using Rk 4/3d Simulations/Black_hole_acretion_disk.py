@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import Verlet_Gravity_numba as V
-from Nbody_Verlet_Gravity_3d_notrails import animate
+import rk4_Gravity_numba as rk
+from Nbody_rk4_Gravity_3d_notrails import animate
 
 
 ##--------------------------Defining the parameters for the simulation-------------------------------------##
@@ -10,9 +10,9 @@ from Nbody_Verlet_Gravity_3d_notrails import animate
 M_bh= 1.0e4
 r_bh= np.array([0.0, 0.0, 0.0])
 v_bh= np.array([0.0, 0.0, 0.0])
-
+ 
 # Setting the no. of and masses bodies
-N_bodies= 1000
+N_bodies= 50000
 N_disk= int(N_bodies*9/10)
 N_jets= int(N_bodies*1/10)
 N_jet_north= int(N_jets//2)
@@ -112,6 +112,6 @@ ylim=[-R_out - 10, R_out + 10]
 zlim=[-R_jet -30, R_jet + 30]
 
 c=['black'] + ['red']*int(N_bodies) 
-ms=[60] + [0.7]*int(N_bodies)
+ms=[60] + [0.3]*int(N_bodies)
 
-animate(r,v,m,e=1,N=N,G=G,xlim=xlim,ylim=ylim,zlim=zlim,title='Black Hole Accretion Disk Simulation',xlabel='X axis',ylabel='Y axis',zlabel='Z axis',grid=False,blit=False,colors=c,ms=ms,frames=10000,dt=0.1,interval=1)
+animate(r,v,m,e=1,N=N,G=G,xlim=xlim,ylim=ylim,zlim=zlim,title='Black Hole Accretion Disk Simulation',xlabel='X axis',ylabel='Y axis',zlabel='Z axis',grid=False,blit=False,colors=c,ms=ms,frames=100,dt=10,interval=0.1)

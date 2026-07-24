@@ -1,6 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
-import Verlet_Gravity as V
+import rk4_Gravity_numba as rk
 from matplotlib.animation import FuncAnimation
 
 
@@ -23,7 +23,7 @@ def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colo
 
 
 
-    a=V.acceleration(m,r,e,N,G)
+    a=rk.acceleration(m, 0, r, v, e, N, G)
 
     def init():
         for i in range(N):
@@ -36,11 +36,10 @@ def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colo
     x_history=np.zeros((N,frames))
     y_history=np.zeros((N,frames))
     z_history=np.zeros((N,frames))
-    
 
     def update_frame(frame):
         nonlocal r,v,a
-        r,v,a=V.verlet(r,v,dt,m,a,e,N,G)
+        r,v,a=rk.rk(r,v,dt,m,a,e,N,G)
         for i in range(N):
             x_history[i,frame]=r[i,0]
             y_history[i,frame]=r[i,1]
@@ -52,16 +51,6 @@ def animate(r,v,m,e,N,G,xlim,ylim,zlim,title,xlabel,ylabel,zlabel,grid,blit,colo
         return body+trails
 
     ani=FuncAnimation(fig,update_frame,frames=frames,interval=interval,init_func=init,blit=blit)
-    frame_array=np.arange(frames)
-    plt.show()
-    plt.plot(frame_array,KE,label='Kinetic Energy')
-    plt.plot(frame_array,PE,label='Potential Energy')
-    plt.plot(frame_array,TE,label='Total Energy')
-    plt.legend()
-    plt.xlabel('Frame')
-    plt.ylabel('Energy')
-    plt.title('Energy vs Frame')
-    plt.show()
     plt.show()
 
 

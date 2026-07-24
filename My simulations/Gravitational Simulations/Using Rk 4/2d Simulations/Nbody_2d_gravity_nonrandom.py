@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import Verlet_Gravity as V
+import rk4_Gravity_numba as rk
 from matplotlib.animation import FuncAnimation
-from Nbody_Verlet_Gravity_2d import animate
+from Nbody_rk4_Gravity_2d import animate
 
 m=np.array([1.0,1.0,1.0],float)
 r=np.array([[0.0,0.0],[0.5,0.87],[-0.5,0.87]],float)
